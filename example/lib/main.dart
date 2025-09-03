@@ -1,4 +1,5 @@
 ///Plugin used for detecting root device in android and jailbreak detection ios.
+library;
 
 ///It uses RootBeer on Android, and DTTJailbreakDetection on iOS.
 

@@ -9,7 +9,8 @@ class RootCheckerPlus {
   }
 
   static Future<bool?> isDeveloperMode() async {
-    final bool? isDeveloperMode = await _channel.invokeMethod('isDeveloperMode');
+    final bool? isDeveloperMode =
+        await _channel.invokeMethod('isDeveloperMode');
     return isDeveloperMode ?? false;
   }
 
