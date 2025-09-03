@@ -50,8 +50,3 @@ android {
         implementation 'com.scottyab:rootbeer-lib:0.1.1'
     }
 }
-
-dependencies {
-    implementation 'io.flutter:flutter_embedding_debug:1.0.0-a8bfdfc394deaed5c57bd45a64ac4294dc976a72'
-    implementation 'com.scottyab:rootbeer-lib:0.1.1'
-}
