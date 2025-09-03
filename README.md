@@ -1,21 +1,50 @@
-# root_checker_plus
+# Root Checker Plus
 
-Plugin used for detecting root device in android and jailbreak detection ios.
+A Flutter plugin for detecting rooted Android devices and jailbroken iOS devices.
 
-It uses [RootBeer](https://github.com/scottyab/rootbeer) on Android,
-and [DTTJailbreakDetection](https://github.com/thii/DTTJailbreakDetection) on iOS.
+## Features
 
-## Getting Started
-With a placeholder:
-```dart
+- **Android Root Detection**: Uses [RootBeer](https://github.com/scottyab/rootbeer) library
+- **iOS Jailbreak Detection**: Uses [DTTJailbreakDetection](https://github.com/thii/DTTJailbreakDetection) library
+- **Developer Mode Detection**: Check if Android developer options are enabled
+- **Cross-platform**: Works on both Android and iOS
 
-import 'package:root_checker_plus/root_checker_plus.dart';
+## Installation
 
+Add this to your package's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  root_checker_plus: ^latest_version
 ```
 
-## initState
-With a placeholder:
+Then run:
+
+```bash
+flutter pub get
+```
+
+## Usage
+
+### Import the package
+
 ```dart
+import 'package:root_checker_plus/root_checker_plus.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
+```
+
+### Basic Implementation
+
+```dart
+class _MyAppState extends State<MyApp> {
+  bool rootedCheck = false;
+  bool devMode = false;
+  bool jailbreak = false;
+
+  @override
+  void initState() {
+    super.initState();
     if (Platform.isAndroid) {
       androidRootChecker();
       developerMode();
@@ -23,13 +52,8 @@ With a placeholder:
     if (Platform.isIOS) {
       iosJailbreak();
     }
+  }
 
-```
-
-## implemented Method
-With a placeholder:
-
-```dart
   Future<void> androidRootChecker() async {
     try {
       rootedCheck = (await RootCheckerPlus.isRootChecker())!;
@@ -37,9 +61,7 @@ With a placeholder:
       rootedCheck = false;
     }
     if (!mounted) return;
-    setState(() {
-      rootedCheck = rootedCheck;
-    });
+    setState(() {});
   }
 
   Future<void> developerMode() async {
@@ -49,9 +71,7 @@ With a placeholder:
       devMode = false;
     }
     if (!mounted) return;
-    setState(() {
-      devMode = devMode;
-    });
+    setState(() {});
   }
 
   Future<void> iosJailbreak() async {
@@ -61,30 +81,54 @@ With a placeholder:
       jailbreak = false;
     }
     if (!mounted) return;
-    setState(() {
-      jailbreak = jailbreak;
-    });
+    setState(() {});
   }
 
-```
-
-## Ouput widgets
-With a placeholder:
-
-```dart
-@override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Root checker example app'),
+          title: const Text('Root Checker Plus'),
         ),
         body: Center(
-            child: Platform.isAndroid
-                ? Text('Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode')
-                : Text('Running on iOS\n Jailbreak: $jailbreak \n')),
+          child: Platform.isAndroid
+              ? Text(
+                  'Android Device\n\nRoot Status: ${rootedCheck ? "Rooted" : "Not Rooted"}\nDeveloper Mode: ${devMode ? "Enabled" : "Disabled"}',
+                  textAlign: TextAlign.center,
+                )
+              : Text(
+                  'iOS Device\n\nJailbreak Status: ${jailbreak ? "Jailbroken" : "Not Jailbroken"}',
+                  textAlign: TextAlign.center,
+                ),
+        ),
       ),
     );
   }
-
+}
 ```
+
+## API Reference
+
+### Methods
+
+| Method | Platform | Return Type | Description |
+|--------|----------|-------------|-------------|
+| `isRootChecker()` | Android | `Future<bool?>` | Checks if the Android device is rooted |
+| `isDeveloperMode()` | Android | `Future<bool?>` | Checks if Android developer options are enabled |
+| `isJailbreak()` | iOS | `Future<bool?>` | Checks if the iOS device is jailbroken |
+
+## Platform Support
+
+| Platform | Supported |
+|----------|:---------:|
+| Android  |     ✅     |
+| iOS      |     ✅     |
+| Web      |     ❌     |
+| Windows  |     ❌     |
+| macOS    |     ❌     |
+| Linux    |     ❌     |
+
+## License
+
+This project is licensed under the MIT License.

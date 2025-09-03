@@ -51,21 +51,22 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Root checker example app'),
-        ),
+        appBar: AppBar(title: const Text('Root checker example app')),
         body: Center(
-            child: Platform.isAndroid
-                ? Text('Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode')
-                : Text('Running on iOS\n Jailbreak: $jailbreak \n')),
+          child: Platform.isAndroid
+              ? Text(
+                  'Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode',
+                )
+              : Text('Running on iOS\n Jailbreak: $jailbreak \n'),
+        ),
       ),
     );
   }
 
-  
   Future<void> androidRootChecker() async {
     try {
-      rootedCheck = (await RootCheckerPlus.isRootChecker())!; // return rootcheck status is true or false
+      rootedCheck =
+          (await RootCheckerPlus.isRootChecker())!; // return rootcheck status is true or false
     } on PlatformException {
       rootedCheck = false;
     }
@@ -77,7 +78,8 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> developerMode() async {
     try {
-      devMode = (await RootCheckerPlus.isDeveloperMode())!; // return Android developer mode status is true or false
+      devMode =
+          (await RootCheckerPlus.isDeveloperMode())!; // return Android developer mode status is true or false
     } on PlatformException {
       devMode = false;
     }
@@ -89,7 +91,8 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> iosJailbreak() async {
     try {
-      jailbreak = (await RootCheckerPlus.isJailbreak())!;  // return iOS jailbreak status is true or false
+      jailbreak =
+          (await RootCheckerPlus.isJailbreak())!; // return iOS jailbreak status is true or false
     } on PlatformException {
       jailbreak = false;
     }
