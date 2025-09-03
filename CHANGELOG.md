@@ -1,3 +1,12 @@
+## 1.0.0
+
+* Bug Fixed.
+
+## 0.0.7
+
+* Added comprehensive API documentation for all public members
+* Enabled public_member_api_docs lint rule
+
 ## 0.0.6
 
 * Added comprehensive API documentation for all public members
