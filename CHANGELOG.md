@@ -1,3 +1,10 @@
+## 0.0.6
+
+* Added comprehensive API documentation for all public members
+* Enabled public_member_api_docs lint rule
+* Improved code examples with detailed usage instructions
+* Enhanced library-level documentation
+
 ## 0.0.5
 
 * Updated README with comprehensive documentation
