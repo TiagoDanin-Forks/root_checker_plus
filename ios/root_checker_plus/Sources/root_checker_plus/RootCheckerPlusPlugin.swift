@@ -2,10 +2,10 @@ import Flutter
 import UIKit
 import DTTJailbreakDetection
 
-public class SwiftRootCheckerPlusPlugin: NSObject, FlutterPlugin {
+public class RootCheckerPlusPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "root_checker_plus", binaryMessenger: registrar.messenger())
-    let instance = SwiftRootCheckerPlusPlugin()
+    let instance = RootCheckerPlusPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
