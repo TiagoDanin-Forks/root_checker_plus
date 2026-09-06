@@ -1,23 +1,22 @@
 name: root_checker_plus
-description: A Flutter plugin for detecting rooted Android devices and jailbroken iOS devices with developer mode detection.
-version: 1.0.0
-homepage: https://github.com/PS-Developers/root_checker_plus
-repository: https://github.com/PS-Developers/root_checker_plus
-issue_tracker: https://github.com/PS-Developers/root_checker_plus/issues
+description: Flutter plugin for Android root detection and iOS jailbreak detection.
+version: 1.1.0
+homepage: https://github.com/PanneerDev/root_checker_plus
+repository: https://github.com/PanneerDev/root_checker_plus
+issue_tracker: https://github.com/PanneerDev/root_checker_plus/issues
 
 environment:
-  sdk: '>=2.17.0 <4.0.0'
-  flutter: '>=1.10.0'
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.1.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

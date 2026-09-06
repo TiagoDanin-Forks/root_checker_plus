@@ -1,26 +1,8 @@
-## 1.0.0
+## 1.1.0
 
-* Bug Fixed.
-
-## 0.0.7
-
-* Added comprehensive API documentation for all public members
-* Enabled public_member_api_docs lint rule
-
-## 0.0.6
-
-* Added comprehensive API documentation for all public members
-* Enabled public_member_api_docs lint rule
-* Improved code examples with detailed usage instructions
-* Enhanced library-level documentation
-
-## 0.0.5
-
-* Updated README with comprehensive documentation
-* Improved code examples and API reference
-* Added platform support matrix
-* Enhanced package metadata for pub.dev
-* Feature: Support 16 KB page sizes
+* Updates the minimum supported SDK version to Flutter 3.44/Dart 3.12.
+* Migrates to built-in Kotlin (AGP 9 compatible).
+* Adds Swift Package Manager support.
 
 ## 0.0.4
 

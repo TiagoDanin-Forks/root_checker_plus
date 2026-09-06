@@ -9,14 +9,12 @@ public class RootCheckerPlusPlugin: NSObject, FlutterPlugin {
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
-   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        switch call.method {
-        case "isJailbreak":
-            let isJailbreak = DTTJailbreakDetection.isJailbroken()
-            result(isJailbreak)
-            break
-        default:
-            result(FlutterMethodNotImplemented)
-        }
+  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    switch call.method {
+    case "isJailbreak":
+      result(DTTJailbreakDetection.isJailbroken())
+    default:
+      result(FlutterMethodNotImplemented)
+    }
   }
 }

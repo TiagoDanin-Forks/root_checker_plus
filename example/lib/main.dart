@@ -1,7 +1,5 @@
-///Plugin used for detecting root device in android and jailbreak detection ios.
-library;
-
-///It uses RootBeer on Android, and DTTJailbreakDetection on iOS.
+// Plugin used for detecting root device in android and jailbreak detection ios.
+// It uses RootBeer on Android, and DTTJailbreakDetection on iOS.
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -52,22 +50,21 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Root checker example app')),
-        body: Center(
-          child: Platform.isAndroid
-              ? Text(
-                  'Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode',
-                )
-              : Text('Running on iOS\n Jailbreak: $jailbreak \n'),
+        appBar: AppBar(
+          title: const Text('Root checker example app'),
         ),
+        body: Center(
+            child: Platform.isAndroid
+                ? Text('Running on Android\n\n Root Checker: $rootedCheck\n Developer Mode Enable:$devMode')
+                : Text('Running on iOS\n Jailbreak: $jailbreak \n')),
       ),
     );
   }
 
+  
   Future<void> androidRootChecker() async {
     try {
-      rootedCheck =
-          (await RootCheckerPlus.isRootChecker())!; // return rootcheck status is true or false
+      rootedCheck = (await RootCheckerPlus.isRootChecker())!; // return rootcheck status is true or false
     } on PlatformException {
       rootedCheck = false;
     }
@@ -79,8 +76,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> developerMode() async {
     try {
-      devMode =
-          (await RootCheckerPlus.isDeveloperMode())!; // return Android developer mode status is true or false
+      devMode = (await RootCheckerPlus.isDeveloperMode())!; // return Android developer mode status is true or false
     } on PlatformException {
       devMode = false;
     }
@@ -92,8 +88,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> iosJailbreak() async {
     try {
-      jailbreak =
-          (await RootCheckerPlus.isJailbreak())!; // return iOS jailbreak status is true or false
+      jailbreak = (await RootCheckerPlus.isJailbreak())!;  // return iOS jailbreak status is true or false
     } on PlatformException {
       jailbreak = false;
     }

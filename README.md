@@ -1,42 +1,41 @@
-# Root Checker Plus
+# root_checker_plus
 
-A Flutter plugin for detecting rooted Android devices and jailbroken iOS devices.
+Flutter plugin for **Android root detection** and **iOS jailbreak detection**.
 
-## Features
+It uses [RootBeer](https://github.com/scottyab/rootbeer) on Android and
+[DTTJailbreakDetection](https://github.com/thii/DTTJailbreakDetection) on iOS.
 
-- **Android Root Detection**: Uses [RootBeer](https://github.com/scottyab/rootbeer) library
-- **iOS Jailbreak Detection**: Uses [DTTJailbreakDetection](https://github.com/thii/DTTJailbreakDetection) library
-- **Developer Mode Detection**: Check if Android developer options are enabled
-- **Cross-platform**: Works on both Android and iOS
+## Requirements
 
-## Installation
+- Flutter **3.44.0** or later
+- Dart **3.12.0** or later
+- Android `minSdk` **24**
+- iOS **13.0** or later
 
-Add this to your package's `pubspec.yaml` file:
+Version `1.1.0` migrates Android to **built-in Kotlin** (AGP 9 compatible) and adds **Swift Package Manager** support alongside CocoaPods.
+
+## Install
 
 ```yaml
 dependencies:
-  root_checker_plus: ^latest_version
+  root_checker_plus: ^1.1.0
 ```
 
-Then run:
-
-```bash
-flutter pub get
+```dart
+import 'package:root_checker_plus/root_checker_plus.dart';
 ```
 
 ## Usage
 
-### Import the package
+Call the APIs from `initState` (or after the first frame). Always handle `PlatformException` — native calls can fail on unsupported states.
 
 ```dart
-import 'package:root_checker_plus/root_checker_plus.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-```
+import 'package:root_checker_plus/root_checker_plus.dart';
 
-### Basic Implementation
-
-```dart
 class _MyAppState extends State<MyApp> {
   bool rootedCheck = false;
   bool devMode = false;
@@ -56,7 +55,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> androidRootChecker() async {
     try {
-      rootedCheck = (await RootCheckerPlus.isRootChecker())!;
+      rootedCheck = (await RootCheckerPlus.isRootChecker()) ?? false;
     } on PlatformException {
       rootedCheck = false;
     }
@@ -66,7 +65,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> developerMode() async {
     try {
-      devMode = (await RootCheckerPlus.isDeveloperMode())!;
+      devMode = (await RootCheckerPlus.isDeveloperMode()) ?? false;
     } on PlatformException {
       devMode = false;
     }
@@ -76,7 +75,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> iosJailbreak() async {
     try {
-      jailbreak = (await RootCheckerPlus.isJailbreak())!;
+      jailbreak = (await RootCheckerPlus.isJailbreak()) ?? false;
     } on PlatformException {
       jailbreak = false;
     }
@@ -88,17 +87,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Root Checker Plus'),
-        ),
+        appBar: AppBar(title: const Text('Root checker example')),
         body: Center(
           child: Platform.isAndroid
               ? Text(
-                  'Android Device\n\nRoot Status: ${rootedCheck ? "Rooted" : "Not Rooted"}\nDeveloper Mode: ${devMode ? "Enabled" : "Disabled"}',
+                  'Android\nRooted: $rootedCheck\nDeveloper mode: $devMode',
                   textAlign: TextAlign.center,
                 )
               : Text(
-                  'iOS Device\n\nJailbreak Status: ${jailbreak ? "Jailbroken" : "Not Jailbroken"}',
+                  'iOS\nJailbroken: $jailbreak',
                   textAlign: TextAlign.center,
                 ),
         ),
@@ -108,27 +105,21 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-## API Reference
+See the [`example`](example) app for a complete sample.
 
-### Methods
+## API
 
-| Method | Platform | Return Type | Description |
-|--------|----------|-------------|-------------|
-| `isRootChecker()` | Android | `Future<bool?>` | Checks if the Android device is rooted |
-| `isDeveloperMode()` | Android | `Future<bool?>` | Checks if Android developer options are enabled |
-| `isJailbreak()` | iOS | `Future<bool?>` | Checks if the iOS device is jailbroken |
+| Method | Platform | Returns |
+| --- | --- | --- |
+| `RootCheckerPlus.isRootChecker()` | Android | `true` if RootBeer considers the device rooted |
+| `RootCheckerPlus.isDeveloperMode()` | Android | `true` if developer options are enabled |
+| `RootCheckerPlus.isJailbreak()` | iOS | `true` if DTTJailbreakDetection considers the device jailbroken |
 
-## Platform Support
+## Notes
 
-| Platform | Supported |
-|----------|:---------:|
-| Android  |     ✅     |
-| iOS      |     ✅     |
-| Web      |     ❌     |
-| Windows  |     ❌     |
-| macOS    |     ❌     |
-| Linux    |     ❌     |
+- These checks are **best-effort**. Root and jailbreak hiding tools can produce false negatives; custom ROMs can produce false positives.
+- Use the results as a signal, not as the only security control.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT. Third-party libraries keep their own licenses (RootBeer, DTTJailbreakDetection).

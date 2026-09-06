@@ -3,30 +3,38 @@
 
 import PackageDescription
 
+// DTTJailbreakDetection is vendored instead of pulled from GitHub because Flutter's
+// SwiftPM resolver fails with "the package manifest at '/Package.swift' cannot be
+// accessed" against that repository. The vendored sources match upstream 0.4.0.
 let package = Package(
-  name: "root_checker_plus",
-  platforms: [
-    .iOS("13.0")
-  ],
-  products: [
-    .library(name: "root-checker-plus", targets: ["root_checker_plus"])
-  ],
-  dependencies: [
-    // DTTJailbreakDetection only gained a Package.swift after its last release
-    // tag (0.4.0), so it has to be pinned to a specific master revision rather
-    // than a semantic version. The CocoaPods path in root_checker_plus.podspec
-    // still resolves the tagged 0.4.0 release.
-    .package(
-      url: "https://github.com/thii/DTTJailbreakDetection.git",
-      revision: "cedd42473963615bd147c74e04346a2fd7f0d9b4"
-    )
-  ],
-  targets: [
-    .target(
-      name: "root_checker_plus",
-      dependencies: [
-        .product(name: "DTTJailbreakDetection", package: "DTTJailbreakDetection")
-      ]
-    )
-  ]
+    name: "root_checker_plus",
+    platforms: [
+        .iOS("13.0")
+    ],
+    products: [
+        .library(name: "root-checker-plus", targets: ["root_checker_plus"])
+    ],
+    dependencies: [
+        .package(name: "FlutterFramework", path: "../FlutterFramework")
+    ],
+    targets: [
+        .target(
+            name: "DTTJailbreakDetection",
+            path: "Sources/DTTJailbreakDetection",
+            publicHeadersPath: "include",
+            cSettings: [
+                .headerSearchPath("include/DTTJailbreakDetection")
+            ],
+            linkerSettings: [
+                .linkedFramework("UIKit")
+            ]
+        ),
+        .target(
+            name: "root_checker_plus",
+            dependencies: [
+                .product(name: "FlutterFramework", package: "FlutterFramework"),
+                "DTTJailbreakDetection"
+            ]
+        )
+    ]
 )
