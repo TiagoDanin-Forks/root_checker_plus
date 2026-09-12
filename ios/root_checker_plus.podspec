@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'root_checker_plus'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'Plugin used for detecting root device in android and jailbreak detection ios.'
   s.description      = <<-DESC
 Plugin used for detecting root device in android and jailbreak detection ios.

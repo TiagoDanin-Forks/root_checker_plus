@@ -18,7 +18,7 @@ Version `1.1.0` migrates Android to **built-in Kotlin** (AGP 9 compatible) and a
 
 ```yaml
 dependencies:
-  root_checker_plus: ^1.1.0
+  root_checker_plus: ^1.1.1
 ```
 
 ```dart

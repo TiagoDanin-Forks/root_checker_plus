@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Updates Android RootBeer to `com.scottyab:rootbeer-lib:0.1.2`.
+
 ## 1.1.0
 
 * Updates the minimum supported SDK version to Flutter 3.44/Dart 3.12.
